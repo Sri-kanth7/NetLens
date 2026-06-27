@@ -1,0 +1,36 @@
+{
+    "chat.disableAIFeatures": false,
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": "explicit"
+    },
+    "files.eol": "\n",
+    "css.lint.unknownAtRules": "ignore",
+    "typescript.tsdk": "node_modules/typescript/lib",
+    "eslint.validate": [
+        "typescript",
+        "typescriptreact",
+        "javascript",
+        "javascriptreact"
+    ],
+    "tailwindCSS.includeLanguages": {
+        "typescriptreact": "html",
+        "typescript": "html"
+    }
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": "explicit"
+    },
+    "files.eol": "\n",
+    "typescript.tsdk": "node_modules/typescript/lib",
+    "eslint.validate": [
+        "typescript",
+        "typescriptreact",
+        "javascript",
+        "javascriptreact"
+    ],
+    "tailwindCSS.includeLanguages": {
+        "typescriptreact": "html",
+        "typescript": "html"
+    }
+}
