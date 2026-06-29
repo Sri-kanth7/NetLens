@@ -9,7 +9,11 @@ export function notFoundHandler(request: Request, _response: Response, next: Nex
   next(new AppError(404, `Route ${request.method} ${request.originalUrl} not found.`));
 }
 
-export function errorHandler(error: unknown, request: Request, response: Response, _next: NextFunction) {
+export function errorHandler(
+  error: unknown,
+  request: Request,
+  response: Response
+) {
   if (error instanceof AppError) {
     sendError(response, {
       statusCode: error.statusCode,
@@ -46,12 +50,21 @@ export function errorHandler(error: unknown, request: Request, response: Respons
     return;
   }
 
+  console.error("FULL ERROR:", error);
+
   logger.error(
     {
       requestId: request.requestId,
-      error
+      error:
+        error instanceof Error
+          ? {
+            name: error.name,
+            message: error.message,
+            stack: error.stack,
+          }
+          : error,
     },
-    'unhandled error'
+    "unhandled error"
   );
 
   sendError(response, {

@@ -7,23 +7,22 @@ export function validateRequest(schema: ZodTypeAny): RequestHandler {
     const parsed = schema.safeParse({
       body: request.body,
       params: request.params,
-      query: request.query
+      query: request.query,
     });
 
     if (!parsed.success) {
-      next(
+      return next(
         new AppError(
           400,
           'Validation failed.',
           parsed.error.issues.map((issue) => issue.message)
         )
       );
-      return;
     }
 
+    // Only body is writable
     request.body = parsed.data.body ?? request.body;
-    request.params = parsed.data.params ?? request.params;
-    request.query = parsed.data.query ?? request.query;
-    next();
+
+    return next();
   };
 }

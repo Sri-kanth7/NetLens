@@ -1,3 +1,6 @@
+import dns from "node:dns";
+
+dns.setServers(["8.8.8.8", "8.8.4.4"]);
 import { createServer } from 'node:http';
 import { Server } from 'socket.io';
 import { env } from './config/env.js';

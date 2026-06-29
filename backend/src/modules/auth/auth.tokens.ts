@@ -7,14 +7,16 @@ type ResetTokenPayload = {
     email: string;
 };
 
-export function signAccessToken(user: AuthenticatedRequestUser) {
+export function signAccessToken(user: AuthenticatedUser) {
     return jwt.sign(user, env.JWT_SECRET, {
+        subject: user.id,
         expiresIn: env.JWT_ACCESS_EXPIRES_IN
     });
 }
 
-export function signRefreshToken(user: AuthenticatedRequestUser) {
+export function signRefreshToken(user: AuthenticatedUser) {
     return jwt.sign(user, env.JWT_SECRET, {
+        subject: user.id,
         expiresIn: env.JWT_REFRESH_EXPIRES_IN
     });
 }

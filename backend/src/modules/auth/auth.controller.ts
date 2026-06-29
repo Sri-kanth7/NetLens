@@ -40,12 +40,24 @@ export async function loginController(request: Request, response: Response) {
 }
 
 export async function refreshController(request: Request, response: Response) {
-  const result = await refresh({ refreshToken: readRefreshToken(request) });
-  response.cookie(refreshTokenCookieName, result.tokens.refreshToken, refreshTokenCookieOptions);
+  console.log("Cookies:", request.cookies);
+  console.log("Signed Cookies:", request.signedCookies);
+
+  const token = readRefreshToken(request);
+
+  console.log("Refresh token:", token);
+
+  const result = await refresh({ refreshToken: token });
+
+  response.cookie(
+    refreshTokenCookieName,
+    result.tokens.refreshToken,
+    refreshTokenCookieOptions
+  );
 
   return sendSuccess(response, {
-    message: 'Token refreshed.',
-    data: result
+    message: "Token refreshed.",
+    data: result,
   });
 }
 
